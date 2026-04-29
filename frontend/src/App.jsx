@@ -1,37 +1,38 @@
-import { Suspense, lazy } from 'react';
-import { Routes, Route, Navigate } from 'react-router-dom';
-import { ToastContainer } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
-import LoadingFallback from './components/common/LoadingFallback';
-import { useAuth } from './context/AuthContext';
-import { useTheme } from './context/ThemeContext';
-import ProtectedRoute from './components/common/ProtectedRoute';
-import { SocketProvider } from './context/SocketContext';
+import { Suspense, lazy } from "react";
+import { Routes, Route, Navigate } from "react-router-dom";
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import LoadingFallback from "./components/common/LoadingFallback";
+import { useAuth } from "./context/AuthContext";
+import { useTheme } from "./context/ThemeContext";
+import ProtectedRoute from "./components/common/ProtectedRoute";
+import { SocketProvider } from "./context/SocketContext";
 
 // Lazy Load Pages
-const Layout = lazy(() => import('./components/layout/Layout'));
-const Login = lazy(() => import('./pages/Login'));
-const Register = lazy(() => import('./pages/Register'));
-const Dashboard = lazy(() => import('./pages/Dashboard'));
-const Patients = lazy(() => import('./pages/Patients'));
-const Doctors = lazy(() => import('./pages/Doctors'));
-const Appointments = lazy(() => import('./pages/Appointments'));
-const Billing = lazy(() => import('./pages/Billing'));
-const Pharmacy = lazy(() => import('./pages/Pharmacy'));
-const MedicalRecords = lazy(() => import('./pages/MedicalRecords'));
-const Prescriptions = lazy(() => import('./pages/Prescriptions'));
-const Settings = lazy(() => import('./pages/Settings'));
-const LabReports = lazy(() => import('./pages/LabReports'));
-const Reports = lazy(() => import('./pages/Reports'));
-const BedManagement = lazy(() => import('./pages/BedManagement'));
-const DoctorSchedule = lazy(() => import('./pages/DoctorSchedule'));
-const Notifications = lazy(() => import('./pages/Notifications'));
-const ActivityLog = lazy(() => import('./pages/ActivityLog'));
-const InventoryAlerts = lazy(() => import('./pages/InventoryAlerts'));
-const Attendance = lazy(() => import('./pages/Attendance'));
-const Leaves = lazy(() => import('./pages/Leaves'));
-const Chat = lazy(() => import('./pages/Chat'));
-const QrPatientDetails = lazy(() => import('./pages/QrPatientDetails'));
+const Home = lazy(() => import("./pages/Home"));
+const Layout = lazy(() => import("./components/layout/Layout"));
+const Login = lazy(() => import("./pages/Login"));
+const Register = lazy(() => import("./pages/Register"));
+const Dashboard = lazy(() => import("./pages/Dashboard"));
+const Patients = lazy(() => import("./pages/Patients"));
+const Doctors = lazy(() => import("./pages/Doctors"));
+const Appointments = lazy(() => import("./pages/Appointments"));
+const Billing = lazy(() => import("./pages/Billing"));
+const Pharmacy = lazy(() => import("./pages/Pharmacy"));
+const MedicalRecords = lazy(() => import("./pages/MedicalRecords"));
+const Prescriptions = lazy(() => import("./pages/Prescriptions"));
+const Settings = lazy(() => import("./pages/Settings"));
+const LabReports = lazy(() => import("./pages/LabReports"));
+const Reports = lazy(() => import("./pages/Reports"));
+const BedManagement = lazy(() => import("./pages/BedManagement"));
+const DoctorSchedule = lazy(() => import("./pages/DoctorSchedule"));
+const Notifications = lazy(() => import("./pages/Notifications"));
+const ActivityLog = lazy(() => import("./pages/ActivityLog"));
+const InventoryAlerts = lazy(() => import("./pages/InventoryAlerts"));
+const Attendance = lazy(() => import("./pages/Attendance"));
+const Leaves = lazy(() => import("./pages/Leaves"));
+const Chat = lazy(() => import("./pages/Chat"));
+const QrPatientDetails = lazy(() => import("./pages/QrPatientDetails"));
 
 function App() {
   const { user } = useAuth();
@@ -41,6 +42,7 @@ function App() {
     <>
       <Suspense fallback={<LoadingFallback />}>
         <Routes>
+          <Route path="/" element={<Home />} />
           <Route
             path="/login"
             element={!user ? <Login /> : <Navigate to="/dashboard" />}
@@ -89,7 +91,7 @@ function App() {
       </Suspense>
       <ToastContainer
         position="top-right"
-        theme={darkMode ? 'dark' : 'light'}
+        theme={darkMode ? "dark" : "light"}
       />
     </>
   );
